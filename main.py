@@ -27,14 +27,14 @@ def index():
                     if word in word_data:
                         resp = make_response(render_template('come_back.html'))
                         resp.set_cookie('day', str(time.time()))
-                        with open('attempted_words.txt', 'w+') as file:
+                        with open('attempted_words.txt', 'a') as file:
                             file.write(f"{word}\n")
                         return resp
-                    with open('word_data.txt', 'w+') as file:
+                    with open('word_data.txt', 'a') as file:
                         file.write(f"{word}\n")
-                    with open('attempted_words.txt', 'w+') as file:
+                    with open('attempted_words.txt', 'a') as file:
                         file.write(f"{word}\n")
-                    resp = make_response(render_template('come_back.html'))
+                    resp = make_response(render_template('new_word.html'))
                     resp.set_cookie('day', str(time.time()))
                     return resp
                 else:
