@@ -1,10 +1,55 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<style>
+		body {
+			background-color: #4c5e86; /* Grey background */
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			height: 100vh; /* Center everything vertically */
+			margin: 0; /* Remove default body margin */
+		}
+
+		h1, h2 {
+			text-align: center; /* Center headers */
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+
+		input[type="text"] {
+			width: 600px; /* Triple the length */
+			height: 70px; /* Same height as the button */
+			background-color: black; /* Black background */
+			color: white; /* White text */
+			border: none; /* Remove input border */
+			border-radius: 10px; /* Slightly boxier */
+			padding: 10px; /* Add some padding */
+			margin: 20px 0; /* Add margin for spacing */
+		}
+
+		button[type="submit"] {
+			width: 600px; /* Match the input width */
+			height: 70px; /* Same height as the input */
+			background-color: #87CEFA; /* Light blue background */
+			color: black; /* Black text */
+			border: none; /* Remove button border */
+			border-radius: 10px; /* Slightly boxier */
+			cursor: pointer;
+			margin-top: 20px; /* Add margin to separate from the input */
+		}
+	</style>
 	<title>Come Back Tomorrow</title>
 </head>
 <body>
+	<font size="5">
 	<h1>Come Back Tomorrow</h1>
 	<p>This word has been entered before. Please come back tomorrow to enter it again.</p>
+	</font>
 </body>
 </html>
