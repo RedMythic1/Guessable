@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, render_template, request, redirect, make_response
+from flask import Flask, render_template, request, redirect, make_response, url_for
 import time
 from pymongo import MongoClient
 from collections.abc import MutableMapping
@@ -26,6 +26,10 @@ attempted_words_collection = db.get_collection("attempted_words")
 # Add this line to your code to get the 'streaks' collection
 streaks_collection = db.get_collection("streaks")
 users = db.get_collection("users")
+
+@app.route('/favicon.ico')
+def favicon():
+    return url_for('static', filename='image/favicon.ico')
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -68,7 +72,7 @@ def index():
                 resp.set_cookie('day', str(time.time()))
                 return resp
             else:
-                return "Invalid word. Please enter a valid word."
+                return render_template('invaild_word.html')
         else:
             return render_template('already_tried.html', streakp='')
     top_streaks = list(streaks_collection.find().sort("streak", -1).limit(10))
