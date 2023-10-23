@@ -76,7 +76,7 @@ def index():
         else:
             return render_template('already_tried.html', streakp='')
     top_streaks = list(streaks_collection.find().sort("streak", -1).limit(10))
-    return render_template('index.html', streakp=f'Current streak {streak}', leaderboard=top_streaks, username="Username:"+user_id)
+    return render_template('index.html', streakp=f'Current streak: {streak}', leaderboard=top_streaks, username="Username: "+user_id)
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
