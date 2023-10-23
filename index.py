@@ -1,7 +1,6 @@
 # app.py
 from flask import Flask, render_template, request, redirect, make_response
 import time
-import enchant
 from pymongo import MongoClient
 from collections.abc import MutableMapping
 from random import randint
@@ -9,7 +8,11 @@ app = Flask(__name__, template_folder='templates')
 
 # Function to check if a word is valid (you can replace this with your own validation logic)
 def is_valid_word(word):
-    return dict.check(word)
+    with open("words_alpha.txt", "r") as word_file:
+        if word in word_file:
+            return True
+        else:
+            return False
 
 # Connect to your MongoDB database
 CONNECTION_STRING = "mongodb+srv://avneh:bhatia@cluster0.3hldccc.mongodb.net/?retryWrites=true&w=majority"
@@ -22,9 +25,6 @@ attempted_words_collection = db.get_collection("attempted_words")
 # Add this line to your code to get the 'streaks' collection
 streaks_collection = db.get_collection("streaks")
 users = db.get_collection("users")
-
-
-dict = enchant.Dict("en_US")
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
