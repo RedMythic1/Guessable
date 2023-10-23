@@ -9,7 +9,8 @@ app = Flask(__name__, template_folder='templates')
 # Function to check if a word is valid (you can replace this with your own validation logic)
 def is_valid_word(word):
     with open("words_alpha.txt", "r") as word_file:
-        if word in word_file:
+        word_contents = word_file.read()
+        if word in word_contents:
             return True
         else:
             return False
