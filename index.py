@@ -3,8 +3,10 @@ from flask import Flask, render_template, request, redirect, make_response, url_
 import time
 from pymongo import MongoClient
 from collections.abc import MutableMapping
-from random import randint
+from random import randint, choice
 app = Flask(__name__, template_folder='templates')
+
+names = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z','1','2','3','4','5','6','7','8','9','0']
 
 # Function to check if a word is valid (you can replace this with your own validation logic)
 def is_valid_word(word):
@@ -34,7 +36,7 @@ def favicon():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     user_id = request.cookies.get("user")
-    if user_id == None:
+    if user_id is None:
         user_id = "Anonymous"
     streak = request.cookies.get("streak")
     if streak is None:
@@ -56,9 +58,9 @@ def index():
                     attempted_words_collection.insert_one({"word": word})
                         # Update the user's streak in the 'streaks' collection
                     if user_id == 'Anonymous':
-                        user_id = f'{word}#{randint(1,9999)}'
+                        user_id = f'{{choice(names)+choice(names)+choice(names)+choice(names)+choice(names)+choice(names)}#{randint(1,9999)}'
                         while users.find_one({"user_id":user_id}):
-                            user_id = f'{word}#{randint(1,9999)}'
+                            user_id = f'{choice(names)+choice(names)+choice(names)+choice(names)+choice(names)+choice(names)}#{randint(1,9999)}'
                     users.insert_one({'user_id':user_id})
                     resp = make_response(render_template('new_word.html', streakp=''))
                     resp.set_cookie('user', str(user_id))
